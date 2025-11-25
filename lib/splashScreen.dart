@@ -33,8 +33,8 @@ class _SplashscreenState extends State<Splashscreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor:  Colors.white,
-      body: Center(child:Image.asset("assets/logoipsum-255 1 (1).png",height: 90.h,) ,),
+    return Scaffold(backgroundColor: Color.fromARGB(255, 245, 246, 248),
+      body: Center(child:Image.asset("assets/logoipsum-255 1 (1).png",height:90.h) ,),
     );
   }
 }

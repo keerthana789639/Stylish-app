@@ -1,301 +1,138 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// class Checkout extends StatefulWidget {
-
-//   const Checkout({super.key});
-
-//   @override
-//   State<Checkout> createState() => _CheckoutState();
-// }
-
-// class _CheckoutState extends State<Checkout> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor:  Color.fromRGBO(241, 214, 214, 1),
-//         leading: Icon(Icons.arrow_back_ios),
-//         centerTitle: true,
-//         title: Text(
-//           "Check Out",
-//           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 19),
-//         ),
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.all(25),
-//         child: Column(
-//           children: [
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 Text(
-//                   "Order",
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w500,
-//                     fontSize: 15.sp,
-//                   ),
-//                 ),
-//                 Text(
-//                   "₹ 7000",
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w500,
-//                     fontSize: 15.sp,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 Text(
-//                   "Shoping",
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w500,
-//                     fontSize: 15.sp,
-//                   ),
-//                 ),
-//                 Text(
-//                   "₹ 30",
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w500,
-//                     fontSize: 15.sp,
-//                   ),
-//                 ),
-//               ],
-//             ),SizedBox(height: 20.h,),
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 Text(
-//                   "Total",
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w500,
-//                     fontSize: 15.sp,
-//                   ),
-//                 ),
-//                 Text(
-//                   "₹ 7030",
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w500,
-//                     fontSize: 15.sp,
-//                   ),
-//                 ),
-//               ],
-//             ),SizedBox(height: 20.h,),
-//             Container(height: 1.h,width: 314.w,color:const Color.fromRGBO(168, 168, 169, 1)),SizedBox(height: 20.h,),
-//             Text(
-//                   "Payment",
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w500,
-//                     fontSize: 15.sp,
-//                   ),
-//                 ),SizedBox(height: 20.h,),
-
-//                  PaymentCard(
-//              iconPath: "assets/visa 1.png",
-           
-              
-//               number: "********2109",
-//               borderColor:  const Color.fromARGB(255, 240, 237, 238),
-//             ),SizedBox(height: 20.h,),
-//                  PaymentCard(
-//              iconPath: "assets/paypal.png",
-           
-              
-//               number: "********2109",
-//               borderColor: const Color.fromARGB(255, 240, 237, 238),
-//             ),SizedBox(height: 20.h,),
-//                  PaymentCard(
-//              iconPath: "assets/maestro 1.png",
-           
-              
-//               number: "********2109",
-//               borderColor:  const Color.fromARGB(255, 240, 237, 238),
-//             ),SizedBox(height: 20.h,),
-//                  PaymentCard(
-//              iconPath: "assets/applepay.png",
-           
-              
-//               number: "********2109",
-//               borderColor: const Color.fromARGB(255, 240, 237, 238),
-//             ),SizedBox(height: 30.h,), ElevatedButton(
-//                   onPressed: () {
-                
-//                   },
-//                   style: ElevatedButton.styleFrom(
-//                     minimumSize: Size(365.w, 40.h),
-//                     backgroundColor: Color.fromARGB(255, 239, 102, 124),
-//                     shape: RoundedRectangleBorder(
-//                       borderRadius: BorderRadiusGeometry.circular(5),
-//                     ),
-//                   ),
-//                   child: Text(
-//                     "Continue",
-//                     style: TextStyle(
-//                       fontWeight: FontWeight.w600,
-//                       fontSize: 20,
-//                       color: Colors.white,
-//                     ),
-//                   ),
-//                 ),
-            
-
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
-// class PaymentCard extends StatelessWidget {
-//   final String iconPath;
-  
-//   final String number;
-//   final Color borderColor;
-
-//   const PaymentCard({
-//     super.key,
-//     required this.iconPath,
-    
-//     required this.number,
-//     required this.borderColor,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: 50.h,
-//       padding: EdgeInsets.symmetric(horizontal: 16.w),
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(12),
-//         border: Border.all(color: borderColor, width: 1.3),
-//       ),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           Row(
-//             children: [
-//               Image.asset(iconPath, height: 20.h),
-              
-//             ],
-//           ),
-//           Text(number),
-//         ],
-//       ),
-//     );
-//   }
-// }
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class Checkout extends StatefulWidget {
-  const Checkout({super.key});
+   final dynamic products;
+  const Checkout({super.key, this.products});
 
   @override
   State<Checkout> createState() => _CheckoutState();
 }
 
 class _CheckoutState extends State<Checkout> {
-  void alert(){
-  showDialog(context: context, 
-  builder:(BuildContext context ){
-    return AlertDialog(backgroundColor: Colors.white,
-    
-  title: Image.asset("assets/images.png",height: 100.h,),
-  content: Text("            Payment done successfully",style: TextStyle(fontWeight: FontWeight.w700),),
-  
-  actions: [Row
-  (mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-    ElevatedButton(onPressed: (){
-      Navigator.pop(context);
-    }, child: Text("Ok")),
-    ],
-  ),]
- );
-  
-}); }
 
-  
-  
-  
+  int selectedIndex = -1;   // for selecting payment method
+
+  void showSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        backgroundColor: Colors.white,
+        title: Column(
+          children: [
+            Image.asset("assets/images.png", height: 90.h),
+            SizedBox(height: 10.h),
+            Text(
+              "Payment Successful!",
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18.sp),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        content: Text(
+          "Your transaction has been completed successfully.",
+          style: TextStyle(fontSize: 14.sp),
+          textAlign: TextAlign.center,
+        ),
+        actionsAlignment: MainAxisAlignment.center,
+        actions: [
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.pink,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            ),
+            child: const Text("OK"),
+          )
+        ],
+      ),
+    );
+  }@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
-  
-  
   Widget build(BuildContext context) {
+        double originalPrice = widget.products.originalPrice.toDouble();
+    double discountPercentage = double.tryParse(widget.products.
+    discount) ?? 0;
+    double finalPrice =
+        originalPrice - (originalPrice * discountPercentage / 100);
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-
-        
-      // leading: IconButton(icon: Icon(Icons.arrow_back_ios_new),
-      //   onPressed: (){Navigator.pop(context);
-
-
-      //   }, ),
         centerTitle: true,
         title: Text(
           "Payment",
-          style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 13, 7, 7)),
+          style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
         ),
       ),
+
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            // Order Summary Card
+            // ORDER SUMMARY CARD
             Container(
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
-                boxShadow: [BoxShadow(color: Colors.grey.shade300, blurRadius: 6, offset: Offset(0, 3))],
+                boxShadow: [BoxShadow(color: Colors.grey.shade300, blurRadius: 6)],
               ),
               child: Column(
                 children: [
-                  summaryRow("Order", "₹ 7000"),
+                  summaryRow("Price", "₹${originalPrice.toStringAsFixed(0)}"),
                   SizedBox(height: 10.h),
-                  summaryRow("Shipping", "₹ 30"),
+                  summaryRow("Discount",  "${discountPercentage.toStringAsFixed(0)}%"),
                   Divider(color: Colors.grey[300], thickness: 1, height: 25.h),
-                  summaryRow("Total", "₹ 7030", isTotal: true),
+                  summaryRow("Total",   "₹${finalPrice.toStringAsFixed(0)}", isTotal: true),
                 ],
               ),
             ),
 
             SizedBox(height: 30.h),
-
-            Text("Payment Methods", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600, color: Colors.black87)),
+            Text(
+              "Payment Methods",
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+            ),
             SizedBox(height: 20.h),
 
-            PaymentCard(iconPath: "assets/visa 1.png", number: "**** 2109", borderColor: Colors.grey.shade300),
+            // PAYMENT METHODS LIST
+            paymentTile(0, "assets/visa 1.png", ""),
             SizedBox(height: 15.h),
-            PaymentCard(iconPath: "assets/paypal.png", number: "**** 2109", borderColor: Colors.grey.shade300),
+            paymentTile(1, "assets/paypal.png", ""),
             SizedBox(height: 15.h),
-            PaymentCard(iconPath: "assets/maestro 1.png", number: "**** 2109", borderColor: Colors.grey.shade300),
+            paymentTile(2, "assets/maestro 1.png", ""),
             SizedBox(height: 15.h),
-            PaymentCard(iconPath: "assets/applepay.png", number: "**** 2109", borderColor: Colors.grey.shade300),
-
-            Spacer(),
-
-            Center(
-              child: ElevatedButton(
-                onPressed: () {alert();
-
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 40.h),
-                  backgroundColor: Colors.pink[400],
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                child: Text("Continue", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.white)),
+            paymentTile(3, "assets/applepay.png", ""),
+SizedBox(height: 25.h,)     ,       ElevatedButton(
+              onPressed: () {
+                if (selectedIndex == -1) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Please select a payment method"))
+                  );
+                } else {
+                  showSuccessDialog();
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 35.h),
+                backgroundColor: Colors.pink,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
-            ),
+              child: Text(
+                "Continue",
+                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.white),
+              ),
+            )
           ],
         ),
       ),
@@ -306,48 +143,65 @@ class _CheckoutState extends State<Checkout> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: TextStyle(fontSize: isTotal ? 16.sp : 14.sp, fontWeight: isTotal ? FontWeight.w600 : FontWeight.w500)),
-        Text(value, style: TextStyle(fontSize: isTotal ? 16.sp : 14.sp, fontWeight: isTotal ? FontWeight.w600 : FontWeight.w500)),
+        Text(
+          title,
+          style: TextStyle(fontSize: isTotal ? 16.sp : 14.sp, fontWeight: isTotal ? FontWeight.w700 : FontWeight.w500),
+        ),
+        Text(
+          value,
+          style: TextStyle(fontSize: isTotal ? 16.sp : 14.sp, fontWeight: isTotal ? FontWeight.w700 : FontWeight.w500),
+        ),
       ],
     );
   }
-}
 
-class PaymentCard extends StatelessWidget {
-  final String iconPath;
-  final String number;
-  final Color borderColor;
+  Widget paymentTile(int index, String icon, String number) {
+    bool isSelected = selectedIndex == index;
 
-  const PaymentCard({
-    super.key,
-    required this.iconPath,
-    required this.number,
-    required this.borderColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 55.h,
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: borderColor, width: 1.2),
-        boxShadow: [BoxShadow(color: Colors.grey.shade200, blurRadius: 4, offset: Offset(0, 2))],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Image.asset(iconPath, height: 25.h),
-              SizedBox(width: 10.w),
-            ],
+    return InkWell(
+      onTap: () {
+        setState(() {
+          selectedIndex = index;
+        });
+      },
+      child: Container(
+        height: 60.h,
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isSelected ? Colors.blue : Colors.grey.shade300,
+            width: 1.5,
           ),
-          Text(number, style: TextStyle(fontWeight: FontWeight.w500)),
-        ],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade200,
+              blurRadius: isSelected ? 8 : 4,
+              offset: Offset(0, 2),
+            )
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Image.asset(icon, height: 28.h),
+                SizedBox(width: 12.w),
+                Text(number, style: TextStyle(fontSize: 14.sp)),
+              ],
+            ),
+
+            // selection indicator
+            Icon(
+              isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
+              color: isSelected ? Colors.blue : Colors.grey,
+            )
+          ],
+        ),
       ),
     );
   }
 }
+

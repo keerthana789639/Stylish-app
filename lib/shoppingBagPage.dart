@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stylish_app/checkOut.dart';
@@ -13,142 +15,231 @@ class ShoppingBagPage extends StatefulWidget {
 class _ShoppingBagPageState extends State<ShoppingBagPage> {
   @override
   Widget build(BuildContext context) {
+
+    double originalPrice = widget.products.originalPrice.toDouble();
+    double discountPercentage = double.tryParse(widget.products.
+    discount) ?? 0;
+    double finalPrice =
+        originalPrice - (originalPrice * discountPercentage / 100);
     return Scaffold(
+      backgroundColor: const Color(0xfff9f9f9),
       appBar: AppBar(
         title: const Text("Shopping Bag"),
         centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        elevation: 0,
+        elevation: 0.5,
       ),
-      backgroundColor: Colors.white,
+
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 12.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Product Card
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 100.w,
-                  height: 120.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    image:  DecorationImage(
-                      image: NetworkImage(widget.products.image), // change to NetworkImage if needed
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10.w),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.products.name,
-                        style: TextStyle(
-                            fontSize: 16.sp, fontWeight: FontWeight.w600),
-                      ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        widget.products.description,
-                        style: TextStyle(
-                            fontSize: 13.sp, color: Colors.grey.shade600),
-                      ),
-                      SizedBox(height: 8.h),
-                      Row(
-                        children: [
-                          Text("Size: 42", style: TextStyle(fontSize: 13.sp)),
-                          SizedBox(width: 10.w),
-                          Text("Qty: 1", style: TextStyle(fontSize: 13.sp)),
-                        ],
-                      ),
-                      SizedBox(height: 8.h),
-                      Text(
-                        "Delivery by 10 May 20XX",
-                        style: TextStyle(
-                            color: Colors.green.shade700,
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-                ),
-                Icon(Icons.favorite_border, color: Colors.grey),
-              ],
-            ),
-            SizedBox(height: 20.h),
 
-            // Apply Coupons
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(8.r)),
-              child: Row(
-                children: [
-                  Icon(Icons.local_offer_outlined, color: Colors.grey.shade700),
-                  SizedBox(width: 10.w),
-                  Text("Apply Coupons", style: TextStyle(fontSize: 14.sp)),
-                  const Spacer(),
-                  Text("Select",
-                      style: TextStyle(
-                          color:  Colors.pink[400],
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp)),
-                ],
-              ),
-            ),
-            SizedBox(height: 20.h),
-
-            // Payment Details
-            newtext(),
-            SizedBox(height: 10.h),
-
+            // -----------------------------------------------------
+            // PRODUCT CARD (Modern UI)
+            // -----------------------------------------------------
             Container(
               padding: EdgeInsets.all(12.w),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.r),
-                color: Colors.grey.shade100,
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  )
+                ],
               ),
-              child: Column(
+              child: Row(
                 children: [
-                  _priceRow("Order Amounts", "₹7,000.00"),
-                  _priceRow("Convenience", "Know More", rightColor: Colors.red),
-                  _priceRow("Delivery Fee", "Free",
-                      rightColor: Colors.green.shade700),
-                  const Divider(),
-                  _priceRow("Order Total", "₹7,000.00",
-                      bold: true, fontSize: 15.sp),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10.r),
+                    child: Image.network(
+                      widget.products.image,
+                      height: 110.h,
+                      width: 95.w,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+
+                  SizedBox(width: 12.w),
+
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.products.name,
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black87),
+                        ),
+                        SizedBox(height: 4.h),
+                        Text(
+                          widget.products.description,
+                          style: TextStyle(
+                              fontSize: 13.sp,
+                              color: Colors.grey.shade600),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: 8.h),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "Sizes: ${widget.products.sizes}",
+                                  style: TextStyle(
+                                      fontSize: 13.sp,fontWeight: FontWeight.bold,
+                                      color: const Color.fromARGB(137, 7, 5, 5)),
+                                ),
+                                SizedBox(width: 12.w),
+                                Text(
+                                  "Qty: 1",
+                                  style: TextStyle(
+                                      fontSize: 13.sp,
+                                      color: const Color.fromARGB(136, 14, 0, 0)),
+                                ),
+                              ],
+                            ),
+                            Icon(Icons.favorite_border,
+                                color: Colors.grey.shade500)
+                          ],
+                        ),
+
+                        SizedBox(height: 9.h),
+                        Text(
+                          "Delivery in 2 days",
+                          style: TextStyle(
+                              fontSize: 13.sp,
+                              color: Colors.green.shade700,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: 10.h),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                "EMI Available   Details",
-                style: TextStyle(fontSize: 13.sp, color: Colors.grey.shade700),
+
+            SizedBox(height: 20.h),
+
+            // -----------------------------------------------------
+            // APPLY COUPONS BAR
+            // -----------------------------------------------------
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 14.h),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.04),
+                    blurRadius: 6,
+                  )
+                ],
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.local_offer_outlined,
+                      color: Colors.pink.shade400),
+                  SizedBox(width: 10.w),
+                  Text(
+                    "Apply Coupons",
+                    style: TextStyle(
+                        fontSize: 14.sp, fontWeight: FontWeight.w600),
+                  ),
+                  const Spacer(),
+                  Text(
+                    "Select",
+                    style: TextStyle(
+                        color: Colors.pink.shade400,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14.sp),
+                  ),
+                ],
               ),
             ),
 
+            SizedBox(height: 20.h),
+
+            // -----------------------------------------------------
+            // PAYMENT DETAILS HEADING
+            // -----------------------------------------------------
+            Text(
+              "Order Payment Details",
+              style:
+                  TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700),
+            ),
+
+            SizedBox(height: 12.h),
+
+            // -----------------------------------------------------
+            // PAYMENT BOX
+            // -----------------------------------------------------
+            Container(
+              padding: EdgeInsets.all(15.w),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.04),
+                    blurRadius: 6,
+                  )
+                ],
+              ),
+              child: Column(
+                children: [
+                  _priceTile("Order Amount","₹${originalPrice.toStringAsFixed(0)}",),
+                  _priceTile("discount amount", "${discountPercentage.toStringAsFixed(0)}% Off",
+
+                      rightColor: Colors.red),
+                  _priceTile("Delivery Fee", "FREE",
+                      rightColor: Colors.green.shade700),
+                  Divider(),
+                  _priceTile("Order Total",   "₹${finalPrice.toStringAsFixed(0)}",
+                      isBold: true, size: 15.sp),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 12.h),
+            // Align(
+            //   alignment: Alignment.centerRight,
+            //   child: Text(
+            //     "EMI Available • Details",
+            //     style: TextStyle(
+            //       fontSize: 12.sp,
+            //       color: Colors.grey.shade600,
+            //     ),
+            //   ),
+            // ),
+
             SizedBox(height: 25.h),
 
-            // Proceed to Payment Button
-            Container(
+            // -----------------------------------------------------
+            // BOTTOM PAYMENT BUTTON
+            // -----------------------------------------------------
+            SizedBox(
               width: double.infinity,
-              height: 30.h,
+              height: 45.h,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Checkout()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Checkout( products: widget.products)));
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:  Colors.pink[400],
+                  backgroundColor: Colors.pink.shade400,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.r)),
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
                 ),
                 child: Text(
                   "Proceed to Payment",
@@ -157,43 +248,38 @@ class _ShoppingBagPageState extends State<ShoppingBagPage> {
               ),
             ),
 
-            SizedBox(height: 10.h),
+            SizedBox(height: 12.h),
             Center(
               child: Text(
-                "₹7,000.00  •  View Details",
+                 "₹${finalPrice.toStringAsFixed(0)} • Final Price",
                 style: TextStyle(
-                    fontSize: 14.sp,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500),
+                    fontSize: 14.sp, fontWeight: FontWeight.w600),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  Text newtext() {
-    return Text("Order Payment Details",
-              style:
-                  TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w600));
-  }
-
-  Widget _priceRow(String title, String value,
-      {Color? rightColor, bool bold = false, double? fontSize}) {
+  // -----------------------------------------------------
+  Widget _priceTile(String title, String value,
+      {Color? rightColor, bool isBold = false, double? size}) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4.h),
+      padding: EdgeInsets.symmetric(vertical: 5.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title,
-              style: TextStyle(fontSize: fontSize ?? 13.sp, color: Colors.black)),
+          Text(
+            title,
+            style: TextStyle(fontSize: size ?? 14.sp),
+          ),
           Text(
             value,
             style: TextStyle(
-              fontSize: fontSize ?? 13.sp,
+              fontSize: size ?? 14.sp,
               color: rightColor ?? Colors.black,
-              fontWeight: bold ? FontWeight.w600 : FontWeight.normal,
+              fontWeight: isBold ? FontWeight.w700 : FontWeight.w500,
             ),
           ),
         ],
@@ -201,3 +287,4 @@ class _ShoppingBagPageState extends State<ShoppingBagPage> {
     );
   }
 }
+

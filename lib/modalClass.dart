@@ -61,7 +61,7 @@
 
 
 class Product {
-  final String id;
+  final dynamic id;
   final String name;
   final String hashtag;
   final String category;
@@ -73,6 +73,7 @@ class Product {
   final String productDetails;
   final dynamic rating;
   final dynamic reviewsCount;
+  
   
 
   Product({

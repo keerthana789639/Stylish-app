@@ -31,6 +31,7 @@ void filteritems() {
     if (query.isEmpty) {
       filterproducts = [];
       filterUniqueHashtags = [];
+      
       return;
     }
 
@@ -86,7 +87,7 @@ void filteritems() {
              //   itemCount: filterproducts.length,
                 itemCount:  filterUniqueHashtags.length,
                 itemBuilder: (context, index) {
-                    var selectedHashtag = filterUniqueHashtags[index].hashtag;
+                    var selectedHashtag = filterUniqueHashtags[index];
                   return InkWell(
                     onTap: () {
                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>Items(productList: filterhashtags,)));

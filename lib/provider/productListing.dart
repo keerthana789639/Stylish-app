@@ -52,7 +52,7 @@ class GetProducts extends ChangeNotifier {
         ),
       );
     }
-
+ _isloading = false;
     notifyListeners();
   }
 

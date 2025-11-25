@@ -2,6 +2,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:stylish_app/account.dart';
 import 'package:stylish_app/admin.dart';
@@ -11,24 +12,30 @@ import 'package:stylish_app/forgetPassword.dart';
 import 'package:stylish_app/imageProvider.dart';
 import 'package:stylish_app/items.dart';
 import 'package:stylish_app/landingPage.dart';
+import 'package:stylish_app/listingProducts.dart';
 import 'package:stylish_app/login.dart';
 import 'package:stylish_app/onboardingPage.dart';
 import 'package:stylish_app/personal.dart';
 import 'package:stylish_app/product.dart';
 import 'package:stylish_app/productDetailPage.dart';
+import 'package:stylish_app/provider/whishlist.dart';
 import 'package:stylish_app/search.dart';
 import 'package:stylish_app/provider/productListing.dart';
 import 'package:stylish_app/shoppingBagPage.dart';
 import 'package:stylish_app/shoppingList.dart';
 import 'package:stylish_app/splashScreen.dart';
+import 'package:stylish_app/updateDetails.dart';
 
 
 
 
 
 void main()async{
-  WidgetsFlutterBinding();
+  // WidgetsFlutterBinding();
+   WidgetsFlutterBinding.ensureInitialized(); // google ads
     await Firebase.initializeApp();
+  
+  await MobileAds.instance.initialize();
   runApp(MyApp());
 }
 
@@ -46,13 +53,14 @@ class MyApp extends StatelessWidget {
         MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (context)=>Imagepro()),
-              ChangeNotifierProvider(create: (context)=>GetProducts())
+              ChangeNotifierProvider(create: (context)=>GetProducts()),
+               ChangeNotifierProvider(create: (_) =>FavoriteProvider()),
             ],
            child: MaterialApp(
             
                    debugShowCheckedModeBanner: false,
                    
-                   home:Bottombar
+                   home:Splashscreen
                    ()
                  ),
          );
